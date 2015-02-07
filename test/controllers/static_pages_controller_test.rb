@@ -18,7 +18,7 @@ class StaticPagesControllerTest < ActionController::TestCase
     assert_select "title", "Help | #{@base_title}"
   end
   
-  test "should het about" do
+  test "should get about" do
     get :about
     assert_response :success
     assert_select "title", "About | #{@base_title}"
@@ -27,6 +27,6 @@ class StaticPagesControllerTest < ActionController::TestCase
   test "should get contact" do
     get :contact
     assert_response :success
-    assert_select "title", "Contact | Ruby on Rails Tutorial Sample-App"
+    assert_select "title", "Contact | #{@base_title}"
   end
 end
