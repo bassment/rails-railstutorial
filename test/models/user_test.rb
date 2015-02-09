@@ -54,6 +54,12 @@ class UserTest < ActiveSupport::TestCase
     assert_not duplicate_user.valid?
   end
   
+  test "email in DB should be lower-case" do
+    mixed_case = @user.email = 'FooBaR@ExamPLE.com'
+    @user.save
+    assert_equal mixed_case.downcase, @user.reload.email
+  end
+  
   test "password should not be less than 6 chars" do
     @user.password = @user.password_confirmation = 'a' * 5
     assert_not @user.valid?
