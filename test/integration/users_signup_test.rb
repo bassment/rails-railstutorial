@@ -22,5 +22,16 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                                 password_confirmation: "IamTeddy" }
     end
     assert_template 'users/show'
+    assert_not flash.nil?
+  end
+  
+  test "error messages" do
+    get signup_path
+    post users_path, :user => {  :name  => "",
+                                  :email => "example@invalid",
+                                  :password => "pas",
+                                  :password_confirmation => "word" }
+    assert_template 'users/new'
+    assert_select "div.alert", "The form contains 4 errors."
   end
 end
